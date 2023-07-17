@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.side-nav{
+  position: fixed;
+  height: 100vh;
+}
+.rs-sidenav{
+  height: 100%;
+}
+.main-content{
+  position: absolute;
+  left: 240px;
+  width: 80%;
+}
+.rs-picker-input:not(.rs-picker-disabled) .rs-picker-toggle{
+  left: 0;
+}
+.user-name{
+  font-size: 14px ;
+  font-weight: bolder;
+  text-transform: uppercase;
+  margin-left: 0px;
+}
+.rs-sidenav-body{
+  height: 100% !important;
+}
+.rs-sidenav-nav{
+  height: 100%;
+}
+.rs-sidenav-nav .rs-nav .rs-nav-default .rs-nav-vertical{
+  height: 100% !important;
+}
+.user-container{
+  position: absolute !important;
+  bottom: 0px;
+  left: 20px;
+}
+.main-content{
+  padding-top: 100px !important;
+}
+
+.rs-sidenav-nav .rs-sidenav-item span{
+  display: block;
+  text-align: left !important;
+}
+
+.graph-wrapper{
+  background-color:#ffffff;
+  padding: 20px;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  border-radius: 5px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  /* max-height: 600px; */
+}
+
+canvas{
+  /* height: 100% !important;
+  width: 100% !important; */
+}
+.inner-graph{
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  padding: 20px 0px;
+  margin: 0px 3px;
+}
+
+#district_prop{
+float: right;
+margin-bottom: 20px;
+padding: 8px 10px;
+border: 0px;
+background: #0b77e2;
+color: #ffffff;
+}
+#district_prop:focus{
+  outline: 0px;
+  border: none;
+}
+
+.bore-holes, .wells, .springs, .piped, .labels-unknown{
+  position: relative;
+}
+.bore-holes::after, .wells::after, .springs::after, .piped::after, .labels-unknown::after{
+  position: absolute;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.bore-holes::after{
+  background: #4daf4a;
+
+
+}
+.springs::after{
+  background: #377eb8;
+
+
+}
+.wells::after{
+  background: #ff7f00;
+
+
+}
+
+.piped::after{
+  background: #b6c5f3;
+}
+
+.labels-unknown::after{
+  background: #984ea3;
+}
+/* td{
+  margin-bottom: 4px;
+} */
