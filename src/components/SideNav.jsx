@@ -34,15 +34,15 @@ const SideNav = ({...navProps}) => {
           <Nav {...navProps}>
             <div className='user-container'>
               <Nav.Item eventKey="2" icon={<User></User>} style={{paddingLeft: '0'}}>
-              {/* <Image style={{ width: '60px', height: '60px', borderRadius: '50%'}} src='./images/Sudi.jpeg'></Image> */}
-             <span className='user-name'> Murindanyi Sudi</span>
+              
+             <span className='user-name'> Lusoma Joseph</span>
             </Nav.Item>
             <Nav.Item  eventKey="3"style={{paddingLeft: '0'}}>
-              {/* <Image style={{ width: '60px', height: '60px', borderRadius: '50%'}} src='./images/Sudi.jpeg'></Image> */}
+              
              <span className=''> 2022/HD05/5583X</span>
             </Nav.Item>
             <Nav.Item  eventKey="3"style={{paddingLeft: '0'}}>
-              {/* <Image style={{ width: '60px', height: '60px', borderRadius: '50%'}} src='./images/Sudi.jpeg'></Image> */}
+              
              <span className=''>2200705583</span>
             </Nav.Item>
 
@@ -50,7 +50,7 @@ const SideNav = ({...navProps}) => {
             </div>
             
              <Nav.Item  eventKey="1" icon={<DashboardIcon></DashboardIcon>} style={{paddingLeft: '0'}}>
-              {/* <Image style={{ width: '60px', height: '60px', borderRadius: '50%'}} src='./images/Sudi.jpeg'></Image> */}
+              
              <span className='' style={{paddingLeft: '50px'}}> Dashboard</span>
             </Nav.Item>
             
