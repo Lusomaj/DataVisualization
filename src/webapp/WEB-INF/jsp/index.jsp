@@ -1,0 +1,426 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+
+	<style>
+		.vertical_col {
+			background-color: #F9F9F9;
+		}
+
+		/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+		/* 
+    Created on : Oct 9, 2021, 4:31:41 PM
+    Author     : Lusoma Joseph
+*/
+
+
+		body {
+			color: #154d88;
+			background: rgba(233, 237, 241, 0.27);
+			font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 1.471;
+		}
+
+		.box-inner {
+			border: 1px solid #DEDEDE;
+			border-radius: 3px;
+			-webkit-border-radius: 3px;
+			-moz-border-radius: 3px;
+			box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+			-webkit-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+			-moz-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+		}
+
+		.box-header {
+			border: none;
+			padding-top: 5px;
+			border-bottom: 1px solid #DEDEDE;
+			border-radius: 3px 3px 0 0;
+			-webkit-border-radius: 3px 3px 0 0;
+			-moz-border-radius: 3px 3px 0 0;
+			height: 35px;
+			min-height: 35px !important;
+			margin-bottom: 0;
+			font-weight: bold;
+			font-size: 16px;
+			background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
+			background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+			background: -o-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+			background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#1a000000', GradientType=0);
+
+		}
+
+		.box {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.box-header h2 {
+			font-size: 15px;
+			width: auto;
+			clear: none;
+			float: left;
+			line-height: 25px;
+			white-space: nowrap;
+			font-weight: bold;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		.box-header h3 {
+			font-size: 13px;
+			width: auto;
+			clear: none;
+			float: left;
+			line-height: 25px;
+			white-space: nowrap;
+		}
+
+		.box-header h2>i {
+			margin-top: 1px;
+		}
+
+		.box-icon {
+			float: right;
+		}
+
+		.box-icon a {
+			clear: none;
+			float: left;
+			margin: 0 2px;
+			height: 20px;
+			width: 5px;
+			margin-top: 1px;
+		}
+
+		.box-icon a i {
+			margin-left: -6px;
+			top: -1px;
+		}
+
+		.box-content {
+			padding: 10px;
+		}
+
+		.panel-actions {
+			margin-top: -20px;
+			margin-bottom: 0;
+			text-align: right;
+		}
+
+		.panel-actions a {
+			color: #333;
+		}
+
+		.panel-fullscreen {
+			display: block;
+			z-index: 9999;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			overflow: auto;
+		}
+
+		.ajax-loader {
+			visibility: hidden;
+			background-color: rgba(255, 255, 255, 0.7);
+			position: absolute;
+			z-index: +100 !important;
+			width: 100%;
+			height: 100%;
+		}
+
+		.ajax-loader img {
+			position: relative;
+			top: 50%;
+			left: 50%;
+		}
+
+
+		.box1 h3 {
+			text-align: center;
+			position: relative;
+			top: 80px;
+		}
+
+		.box1 {
+			width: 100%;
+			height: 140px;
+			background: #FFF;
+			margin: 40px auto;
+		}
+
+		/*==================================================
+ * Effect 1
+ * ===============================================*/
+		.effect1 {
+			-webkit-box-shadow: 0 10px 6px -6px #777;
+			-moz-box-shadow: 0 10px 6px -6px #777;
+			box-shadow: 0 10px 6px -6px #777;
+		}
+
+		input.post_input_text {
+			font-family: Tahoma;
+			font-size: 11px;
+			font-weight: normal;
+			color: #000000;
+			width: 90%;
+			height: 20px;
+			padding-left: 5px;
+			padding-top: 2px;
+			padding-bottom: 0px;
+			border: 1px solid #b1cadb;
+			background-color: white;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="maincontent" class="row">
+
+		<div id="teminalDetailsDiv"></div>
+		<div class="row" style="margin-left: 1.5%">
+			<div class="box row panel panel-default" style="width: 100%">
+				<div class="box-inner" style="height: 100%">
+					<div data-original-title="" class="box-header well panel-heading">
+						<h2><i class="glyphicon glyphicon-credit-card panel-title"></i> WATER zQUALITY VISUALIZATIONS
+						</h2>
+
+						<ul class="list-inline panel-actions pull-right" style="margin-top:2px">
+							<li><a href="#" id="panel-fullscreen" role="button" title="Toggle fullscreen"><i
+										class="glyphicon glyphicon-resize-full"></i></a></li>
+						</ul>
+					</div>
+
+
+
+					<div class="box-content panel-body" id="box_content">
+						<div class="row" style="margin-left: 0%" id="respDiv1">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#info">Data Visualization</a></li>
+								<li><a data-toggle="tab" href="#resultDiv"
+										onclick="clearDiv('resultDiv');ajaxSubmitData('cardmanagement.htm', 'resultDiv', 'act=userapprovalrequestsinqueue&pan=0&customerId=0&lastname=0&firstname=0&accountId=0&i=0&b=a&c=a&d=0&ofst=1&maxR=100&sStr=', 'GET');">Data
+										Visualization</a></li>
+								<li><a data-toggle="tab" href="#resultDiv"
+										onclick="clearDiv('resultDiv');ajaxSubmitData('cardmanagement.htm', 'resultDiv', 'act=userapprovalrequests&pan=0&customerId=0&lastname=0&firstname=0&accountId=0&i=0&b=a&c=a&d=0&ofst=1&maxR=100&sStr=', 'GET');">Authorized
+										Map Visualisations</a></li>
+
+							</ul>
+
+							<div class="tab-content" style="margin-top: -15px;border-style: none" id="viewcontents">
+								<div id="info" class="tab-pane fade in active">
+
+									<div class="row">&nbsp;</div>
+									<div class="row">&nbsp;</div>
+
+									<div id='searchview' style="float: left" class="col-lg-12 col-md-12 col-sm-12">
+										<div class="row" id="searchBox">
+
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<tr th:each="district : ${districts}">
+													<td th:text="${district}">${district}</td>
+													
+												</tr>
+
+												<table class="table table-bordered table-full-width">
+													<tbody>
+														<tr>
+
+															<td class="vertical_col">DISTRICT<span
+																	class="symbol required"></span></td>
+															<td class="vertical_row" style="background-color: white">
+																<input id="cardnumber" type="number" name="cardnumber"
+																	class="form-control" tabindex="1">
+															</td>
+
+
+														</tr>
+
+													</tbody>
+												</table>
+
+
+												<table class="pull-right">
+													<tbody>
+														<tr>
+															<td class="post_section_footer_left">&nbsp;</td>
+															<td class="post_section_footer_right"><input id="searchbtn"
+																	type="submit" name="searchbtn" value="Search"
+																	onclick="validateB4Submit();" tabindex="9"
+																	class="btn btn-default">
+																<input id="clearBtn" type="submit" name="clearBtn"
+																	value="Clear" onclick="clearInputs();" tabindex="10"
+																	class="btn btn-default">
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<div id="barchart"></div>
+											</div>
+										</div>
+									</div>
+									<div id='searchResult' style="float: left;margin-top: 1%"
+										class="col-lg-12 col-md-12 col-sm-12">
+
+									</div>
+
+
+								</div>
+
+								<div id="resultDiv" class="tab-pane fade in active">
+
+								</div>
+
+
+							</div>
+						</div>
+
+
+
+					</div>
+
+
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+	</div>
+	<!-- jQuery (load it before Bootstrap JavaScript) -->
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+	<!-- Bootstrap JavaScript -->
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" th:src="@{/js/ajaxCalls.js}"></script>
+	<script type="text/javascript" th:src="@{/js/general.js}"></script>
+	<script type="text/javascript" th:src="@{/js/dhtmlwindow.js}"></script>
+	<script>
+
+
+		function clearInputs() {
+			document.getElementById('cardnumber').value = '';
+			document.getElementById('customerId').value = '';
+			document.getElementById('accountId').value = '';
+		}
+
+		function validateB4Submit() {
+			valError = false;
+			var pan = document.getElementById('cardnumber').value;
+			var customerId = document.getElementById('customerId').value;
+			var accountId = document.getElementById('accountId').value;
+			var firstname = '';// document.getElementById('firstname').value;
+			var lastname = '';//document.getElementById('lastname').value;
+
+			//console.log('pan ' + pan);
+			//console.log('CustomerId: '+customerId);
+			//console.log('AccountId: '+accountId);
+
+
+			clearDiv('searchResult');
+			ajaxSubmitData('cardmanagement.htm', 'searchResult', 'act=searchresults&pan=' + pan + '&customerId=' + customerId + '&lastname=' + lastname + '&firstname=' + firstname + '&accountId=' + accountId + '&i=0&b=a&c=a&d=0&ofst=1&maxR=100&sStr=', 'GET');
+
+
+		}
+
+	</script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			//Toggle fullscreen
+			$("#panel-fullscreen").click(function (e) {
+				e.preventDefault();
+				var $this = $(this);
+				if ($this.children('i').hasClass('glyphicon-resize-full')) {
+					$this.children('i').removeClass('glyphicon-resize-full');
+					$this.children('i').addClass('glyphicon-resize-small');
+				} else if ($this.children('i').hasClass('glyphicon-resize-small')) {
+					$this.children('i').removeClass('glyphicon-resize-small');
+					$this.children('i').addClass('glyphicon-resize-full');
+				}
+				$(this).closest('.panel').toggleClass('panel-fullscreen');
+			});
+		});
+
+	</script>
+
+
+	<script>
+		const data = [
+			{label: "Source 1", value: 24},
+			{label: "Source 2", value: 24.4},
+			{label: "Source 3", value: 27.5},
+			// Add more data points as needed
+		];
+
+		const svg = d3.select("#barchart")
+			.append("svg")
+			.attr("width", 400)
+			.attr("height", 300);
+
+		const margin = {top: 20, right: 30, bottom: 40, left: 40};
+		const width = 400 - margin.left - margin.right;
+		const height = 300 - margin.top - margin.bottom;
+
+		const x = d3.scaleBand()
+			.domain(data.map(d => d.label))
+			.range([margin.left, width - margin.right])
+			.padding(0.1);
+
+		const y = d3.scaleLinear()
+			.domain([0, d3.max(data, d => d.value)])
+			.range([height - margin.bottom, margin.top]);
+
+		svg.selectAll("rect")
+			.data(data)
+			.enter()
+			.append("rect")
+			.attr("x", d => x(d.label))
+			.attr("y", d => y(d.value))
+			.attr("width", x.bandwidth())
+			.attr("height", d => height - margin.bottom - y(d.value))
+			.attr("fill", "steelblue");
+
+		svg.append("g")
+			.attr("transform", `translate(0,${height - margin.bottom})`)
+			.call(d3.axisBottom(x));
+
+		svg.append("g")
+			.attr("transform", `translate(${margin.left},0)`)
+			.call(d3.axisLeft(y));
+	</script>
+</body>
+
+</html>
+
+</body>
+
+</html>

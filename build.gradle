@@ -1,0 +1,40 @@
+apply plugin: 'application'
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.interswitchug'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'javax.servlet:jstl:1.2'
+	
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.apache.poi:poi:5.0.0'
+    implementation 'org.apache.poi:poi-ooxml:5.0.0'
+    
+     // JSP Support
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.44'
+
+    // Spring Boot Starter with Embedded Tomcat
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat:2.4.4'
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-constants', version: '1.13'
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-ttf2svg', version: '1.13'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
